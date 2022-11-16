@@ -11,7 +11,7 @@ export class AuthService {
 
   async validateUser(email: string, pass: string): Promise < any > {
     console.log(email)
-    const user = await this.userService.getUserByUsername(email);
+    const user = await this.userService.getUserByEmail(email);
     if (user && (await this.hashService.comparePassword(pass, user.password))) {
       return user;
     }
@@ -20,7 +20,7 @@ export class AuthService {
 
   async login(user: any) {
     const payload = {
-      username: user.email,
+      email: user.email,
       sub: user.id
     };
     return {

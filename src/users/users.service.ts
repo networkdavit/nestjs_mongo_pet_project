@@ -11,9 +11,9 @@ export class UsersService {
 
   constructor(@InjectModel(User.name) private userModel: Model < UserDocument > , private hashService: HashService) {}
 
-  async getUserByUsername(username: string) {
+  async getUserByEmail(email: string) {
     return this.userModel.findOne({
-        username
+        email
       })
       .exec();
   }
@@ -23,7 +23,7 @@ export class UsersService {
 
     const createUser = new this.userModel(createUserDto);
     // check if user exists
-    const user = await this.getUserByUsername(createUser.username);
+    const user = await this.getUserByEmail(createUser.email);
     if (user) {
       throw new BadRequestException();
     }

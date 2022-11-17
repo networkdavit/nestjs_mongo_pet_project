@@ -6,22 +6,28 @@ export type UserDocument = User & Document;
 @Schema()
 export class User {
   @Prop({
-    required: true
+    required: true,
+    minlength: 2,
+    maxlength: 35
   })
   name: string;
 
   @Prop({
-    required: true
+    required: true,
+    minlength: 2,
+    maxlength: 35
   })
   surname: string;
 
   @Prop({
-    required: true
+    required: true,
+    maxlength: 60
   })
   email: string;
 
   @Prop({
-    required: true
+    required: true,
+    minlength: 8
   })
   password: string;
 }

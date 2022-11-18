@@ -10,10 +10,8 @@ import * as dotenv from 'dotenv';
 
 
 dotenv.config()
-const MONGO_URL = process.env.MONGO_URL;
-console.log(MONGO_URL)
+// const MONGO_URL = process.env.MONGO_URL;
 const MONGO_LOCAL_URL = process.env.MONGO_LOCAL_URL;
-console.log(MONGO_LOCAL_URL)
 
 @Module({
   imports: [MongooseModule.forRoot(MONGO_LOCAL_URL),

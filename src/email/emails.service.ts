@@ -1,17 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import { CreateEmailDto } from './dto/create-email.dto';
 import { MailerService } from '@nestjs-modules/mailer';
+import { ProjectInvitationController } from 'src/projectinvitations/projectinvitation.controller';
 
 @Injectable()
 export class EmailsService {
-  constructor(private mailerService: MailerService) {}
+  constructor(private mailerService: MailerService, private projectInvite: ProjectInvitationController) {}
 
   async sendEmail(createEmailDto: CreateEmailDto): Promise<string> {
     const { email, name } = createEmailDto;
+    const link = this.projectInvite.generateLink("test");
 
     const emailSent = await this.mailerService.sendMail({
       to: email,
       subject: 'Project Invitations`',
+      text: link.email,
       context: {
         name,
       },

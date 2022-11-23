@@ -6,6 +6,7 @@ import { PostsModule } from './posts/posts.module';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './users/users.module';
+import { EmailsModule } from './email/emails.module';
 import * as dotenv from 'dotenv';
 
 
@@ -18,6 +19,7 @@ const MONGO_LOCAL_URL = process.env.MONGO_LOCAL_URL;
   PostsModule,
   AuthModule,
   UserModule,
+  EmailsModule,
   ConfigModule.forRoot()
 ],
   controllers: [AppController],

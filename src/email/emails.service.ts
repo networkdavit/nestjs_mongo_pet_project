@@ -9,12 +9,12 @@ export class EmailsService {
 
   async sendEmail(createEmailDto: CreateEmailDto): Promise<string> {
     const { email, name } = createEmailDto;
-    const link = this.projectInvite.generateLink("test");
+    // const link = this.projectInvite.generateLink();
 
     const emailSent = await this.mailerService.sendMail({
       to: email,
       subject: 'Project Invitations`',
-      text: link.email,
+      text: "asdf",
       context: {
         name,
       },

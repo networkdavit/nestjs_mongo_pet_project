@@ -14,12 +14,11 @@ export class EmailsService {
     const emailSent = await this.mailerService.sendMail({
       to: email,
       subject: 'Project Invitations`',
-      text: "asdf",
+      text: `http://localhost:3000/users/project/emailinvitation/${name}`,
       context: {
         name,
       },
     });
-    console.log(emailSent);
     return 'success';
   }
 }

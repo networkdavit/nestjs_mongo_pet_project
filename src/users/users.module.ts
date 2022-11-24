@@ -9,12 +9,17 @@ import { HashService } from 'src/users/hash.service';
 import { AuthService } from 'src/auth/auth.service';
 import { JwtStrategy } from 'src/strategy/jwt.strategy';
 import { LocalStrategy } from 'src/strategy/local.strategy';
+import { Project, ProjectSchema } from 'src/schemas/project.schema';
 
 @Module({
   imports: [
    MongooseModule.forFeature([{
       name: User.name,
       schema: UserSchema
+    }]),
+    MongooseModule.forFeature([{
+      name: Project.name,
+      schema: ProjectSchema
     }]),
    JwtModule.register({
       secret: jwtConstants.secret,

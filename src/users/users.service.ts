@@ -1,10 +1,9 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { HashService } from './hash.service';
-import { User, UserDocument} from '../schemas/user.schema'
+import { User, UserDocument} from '../schemas/user.schema';
 
 @Injectable()
 export class UsersService {
@@ -19,15 +18,12 @@ export class UsersService {
   }
 
   async registerUser(createUserDto: CreateUserDto) {
-    // validate DTO
 
     const createUser = new this.userModel(createUserDto);
-    // check if user exists
     const user = await this.getUserByEmail(createUser.email);
     if (user) {
       throw new BadRequestException();
     }
-    // Hash Password
     createUser.password = await this.hashService.hashPassword(createUser.password);
 
     return createUser.save();

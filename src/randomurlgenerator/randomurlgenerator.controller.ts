@@ -1,6 +1,8 @@
-import { Controller, Get, Param} from '@nestjs/common';
+import { Controller, Get, Param, UseGuards} from '@nestjs/common';
 import { RandomUrlGeneratorService } from './randourlgenerator.service';
+import { AuthGuard } from '@nestjs/passport';
 
+@UseGuards(AuthGuard('jwt'))
 @Controller('invitation')
 export class RandomUrlGeneratorController {
   constructor(private readonly randomUrlGeneratorService : RandomUrlGeneratorService) {}

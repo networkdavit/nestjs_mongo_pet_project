@@ -5,10 +5,12 @@ import { HashService} from 'src/users/hash.service';
 import { Model } from 'mongoose';
 import { Project, ProjectDocument } from 'src/schemas/project.schema';
 import { InjectModel } from '@nestjs/mongoose';
-  
+import { User, UserDocument} from '../schemas/user.schema';
+
 @Injectable()
 export class AuthService {
-  constructor(private userService: UsersService,
+  constructor(@InjectModel(User.name) private userModel: Model < UserDocument >,
+    private userService: UsersService,
     private hashService: HashService,
     private jwtService: JwtService,
     @InjectModel(Project.name)
@@ -19,9 +21,9 @@ export class AuthService {
 
     if (user && (await this.hashService.comparePassword(pass, user.password))) {
       return user;
+      }
+      return null;
     }
-    return null;
-  }
 
   async login(user: any) {
     const payload = {
@@ -34,6 +36,7 @@ export class AuthService {
   }
 
   async addToProject(user: any, projectName: string){
+
     const email = user.email;
     const pendingUser = await this.userService.getUserByEmail(email);
     const memberId = pendingUser.id;
@@ -49,10 +52,13 @@ export class AuthService {
       memberName: memberName,
       memberSurname: memberSurname
     }
-   
-    return await new this.projectModel(userAddedData).save()
+    const projectUserEmail = this.userModel.findOne({email})
 
-
-    
+    if(!projectUserEmail){
+      return await new this.projectModel(userAddedData).save()
+    }
+    else{
+      return {message: "User is already in the project"}
+    }
   }
 }

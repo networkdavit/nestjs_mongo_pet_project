@@ -14,7 +14,7 @@ export class EmailsService {
     const emailSent = await this.mailerService.sendMail({
       to: email,
       subject: 'Project Invitations`',
-      text: `http://localhost:3000/users/project/emailinvitation/${name}`,
+      text: `http://localhost:3000/users/projects/emailinvitation/${name}`,
       context: {
         name,
       },

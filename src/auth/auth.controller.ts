@@ -1,5 +1,5 @@
 import { AuthService} from './auth.service';
-import { Controller, UseGuards, Post,Get, Body, Param} from '@nestjs/common';
+import { Controller, UseGuards, Post, Body, Param} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { LoginDto } from './dto/login.dto';
 
@@ -13,7 +13,7 @@ export class AuthController {
   }
 
   @UseGuards(AuthGuard('local'))
-  @Get(`/projects/emailinvitation/:projectName`)
+  @Post(`/projects/emailinvitation/:projectName`)
   async addToProject(@Body() LoginDto: LoginDto, @Param('projectName') projectName: string) {
     return this.authService.addToProject(LoginDto, projectName);
   }

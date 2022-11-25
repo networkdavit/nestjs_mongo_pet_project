@@ -1,17 +1,11 @@
-import { Controller, Get} from '@nestjs/common';
+import { Controller, Get, Param} from '@nestjs/common';
 import { RandomUrlGeneratorService } from './randourlgenerator.service';
 
 @Controller('invitation')
 export class RandomUrlGeneratorController {
   constructor(private readonly randomUrlGeneratorService : RandomUrlGeneratorService) {}
-  @Get(`/project/url/:project`)
-  async generateUrl() {
-    return  this.randomUrlGeneratorService.generateUrl();
+  @Get(`/project/url/:projectName`)
+  async generateUrl(@Param('projectName') projectName: string) {
+    return  this.randomUrlGeneratorService.generateUrl(projectName);
   }
-
-//   @UseGuards(AuthGuard('local'))
-//   @Get(`/projects/emailinvitation/:projectName`)
-//   async addToProject(@Body() LoginDto: LoginDto, @Param('projectName') projectName: string) {
-//     return this.authService.addToProject(LoginDto, projectName);
-//   }
 }

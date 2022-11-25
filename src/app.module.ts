@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './users/users.module';
 import { EmailsModule } from './email/emails.module';
 import { ProjectInvirationModule } from './projectinvitations/projectinvitation.module';
+import { RandomUrlGeneratorModule } from './randomurlgenerator/randomurlgenerator.module';
 import * as dotenv from 'dotenv';
 
 
@@ -22,6 +23,7 @@ const MONGO_LOCAL_URL = process.env.MONGO_LOCAL_URL;
   UserModule,
   EmailsModule,
   ProjectInvirationModule,
+  RandomUrlGeneratorModule,
   ConfigModule.forRoot(),
 ],
   controllers: [AppController],

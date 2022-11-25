@@ -3,7 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString, MaxLength, MinLength, Matches} from 'class-validator';
 
 export class CreateUserDto extends User {
-    @Matches('[a-zA-Z\p{L}][a-zA-Z\p{L}\p{P}\p{S}\s]*')
+    @Matches('^[a-zA-Z\p{L}][a-zA-Z\p{L}\p{P}\p{S}\s]*')
     @IsString()
     @IsNotEmpty()
     @MinLength(2)
@@ -11,7 +11,7 @@ export class CreateUserDto extends User {
     @ApiProperty()
     name: string;
 
-    @Matches('[a-zA-Z\p{L}][a-zA-Z\p{L}\p{P}\p{S}\s]*')
+    @Matches('^[a-zA-Z\p{L}][a-zA-Z\p{L}\p{P}\p{S}\s]*')
     @IsString()
     @IsNotEmpty()
     @MinLength(2)
